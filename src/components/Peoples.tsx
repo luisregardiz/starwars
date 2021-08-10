@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 const getPeople = async (page: number) => {
-    const URL = `http://swapi.dev/api/people/?page=${page}`;
+    const URL = `https://swapi.dev/api/people/?page=${page}`;
     const res = await fetch(URL);
     return res.json();
 };

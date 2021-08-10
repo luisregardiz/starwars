@@ -7,7 +7,7 @@ import { IoPlanetSharp } from "react-icons/io5";
 import { useState } from "react";
 
 const getPlanets = async (page: number) => {
-    const URL = `http://swapi.dev/api/planets/?page=${page}`;
+    const URL = `https://swapi.dev/api/planets/?page=${page}`;
     const res = await fetch(URL);
     return res.json();
 };
