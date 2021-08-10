@@ -16,7 +16,7 @@
 }
 
 .card {
-  @apply p-5 rounded-lg shadow-xl flex-auto min-w-max
+  @apply p-5 rounded-lg shadow-xl flex-auto min-w-min
 }
 .climate {
   @apply rounded-lg text-sm px-2 py-1 font-semibold
@@ -24,6 +24,7 @@
 @tailwind utilities;
 
 body {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;

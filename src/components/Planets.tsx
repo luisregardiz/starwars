@@ -26,7 +26,7 @@ const Planets = () => {
     console.log();
     return (
         <>
-            <div className="section bg-blue-100 ">
+            <div className="section bg-blue-100">
                 <h1 className="text-gray-800 e bg-gray-100 heading-section ">
                     Planets <IoPlanetSharp className="ml-4" />
                 </h1>
