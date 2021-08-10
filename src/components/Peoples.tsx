@@ -16,7 +16,7 @@ const getPeople = async (page: number) => {
 const Peoples = () => {
     const [page, setPage] = useState(1);
 
-    const { data, isLoading, error, isPreviousData, isFetching } = useQuery(
+    const { data, isLoading, error, isPreviousData } = useQuery(
         ["people", page],
         () => getPeople(page),
         {
@@ -31,7 +31,7 @@ const Peoples = () => {
                 <h1 className="text-gray-800 bg-gray-50  heading-section">
                     People <IoIosPeople className="ml-4" />
                 </h1>
-                {isLoading || isFetching ? (
+                {isLoading ? (
                     <Spinner />
                 ) : (
                     <div className="flex flex-wrap m-5 gap-4 ">
