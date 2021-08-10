@@ -13,8 +13,8 @@ const getPlanets = async (page: number) => {
 };
 
 const Planets = () => {
-    const [page, setPage] = useState(0);
-    const { data, isLoading, error, isFetching, isPreviousData } = useQuery(
+    const [page, setPage] = useState(1);
+    const { data, isLoading, error, isPreviousData } = useQuery(
         ["planets", page],
         () => getPlanets(page),
         {
@@ -23,46 +23,47 @@ const Planets = () => {
     );
 
     if (error) return <Error />;
-
+    console.log();
     return (
-        <div className="section bg-blue-100">
-            <h1 className="text-gray-800 e bg-gray-100 heading-section ">
-                Planets <IoPlanetSharp className="ml-4" />
-            </h1>
+        <>
+            <div className="section bg-blue-100 ">
+                <h1 className="text-gray-800 e bg-gray-100 heading-section ">
+                    Planets <IoPlanetSharp className="ml-4" />
+                </h1>
 
-            {isLoading ? (
-                <Spinner />
-            ) : (
-                <div className="flex flex-wrap m-5 gap-4 ">
-                    {data?.results.map((planet: Swapi) => {
-                        return <Planet key={planet.name} planet={planet} />;
-                    })}
-                </div>
-            )}
-            <div>
-                <span>Current Page: {page + 1}</span>
+                {isLoading ? (
+                    <Spinner />
+                ) : (
+                    <div className="flex flex-wrap m-5 gap-4">
+                        {data?.results.map((planet: Swapi) => {
+                            return <Planet key={planet.name} planet={planet} />;
+                        })}
+                    </div>
+                )}
+            </div>
+            <div className="flex justify-center items-center space-x-4 my-4">
                 <button
-                    className="btn bg-gray-900 text-gray-50"
-                    onClick={() => setPage((old) => Math.max(old - 1, 0))}
-                    disabled={page === 0}
+                    className="btn bg-gray-100 text-gray-900 "
+                    onClick={() => setPage((old) => Math.max(old - 1, 1))}
+                    disabled={page === 1}
                 >
-                    Previous Page
+                    Prev
                 </button>{" "}
+                <span className="bg-gray-700 px-4 py-1 rounded-lg  text-gray-100 font-bold">{page}</span>
                 <button
-                    className="btn bg-gray-900 text-gray-50"
+                    className="btn bg-gray-100 text-gray-900  "
                     onClick={() => {
-                        if (!isPreviousData && data.hasMore) {
+                        if (!isPreviousData) {
                             setPage((old) => old + 1);
                         }
                     }}
                     // Disable the Next Page button until we know a next page is available
-                    disabled={isPreviousData || !data?.hasMore}
+                    disabled={isPreviousData || data?.next === null}
                 >
-                    Next Page
+                    Next
                 </button>
-                {isFetching ? <span> Loading...</span> : null}{" "}
             </div>
-        </div>
+        </>
     );
 };
 
